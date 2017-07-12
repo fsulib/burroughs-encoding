@@ -26,9 +26,21 @@ This is the reference encoding documentation for the Burroughs Project. For narr
 
 ### &lt;sourceDoc&gt;
 
+The `&lt;sourceDoc&gt;` element surrounds the entire text. If you are used to working with other TEI documents, this roughly corresponds with the `&lt;text&gt;` element. all of your transcribed text should go within `&lt;sourceDoc&gt;`.
+
+`&lt;sourceDoc&gt;` should always be assigned an `@xml:id` that corresponds to the Special Collections naming conventions for the document. Generally, this will consist of the name of the text and a 5-character identifier for the witness. So, for example, the manuscript from FSU for the Blade Runner would be "bladerunner-msfsu."
+
 ### &lt;surfaceGrp&gt;
 
+`&lt;surfaceGrp&gt;` groups together "surfaces" or pages. If you were to encode multiple documents within one xml file, you would group each document within its own `&lt;surfaceGrp&gt;`. As it stands, we encode one document per xml file, so you will only every have one `&lt;surfaceGrp&gt;` within each `&lt;sourceDoc&gt;`
+
 ### &lt;surface&gt;
+
+The `&lt;surface&gt;` element corresponds to one side of a given page. Each `&lt;surface&gt;` should be assigned a `@facs` (facsimile) attribute that corresponds to the file name of the image for a given digitized page. If you do not know the file naming convention for `@facs` on a given document, do not add `@facs`, as a project manager or library staff person will add this during the publication process.
+
+If a given page was originally hand-written, you should give the `&lt;surface&gt;` the `@ana` attribute with a value of "#manuscript". If it was typed, do not use `@ana`.
+
+<!-- Include information about recto and verso pages + xml:ids -->
 
 ## Chunk-level elements
 
