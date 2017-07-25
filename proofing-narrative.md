@@ -35,3 +35,29 @@ If these return any results, add the correct information on `@hand`.
 `//del/@status`
 
 The only allowable value of `@type` on `<del>` is `implied` (although &lt;oXygen/&gt; may return some instances of `<del status="unremarkable">`, as that is the default value for that attribute; just make sure that these attributes are not actually typed in). 
+
+#### Testing consistency
+
+It is also a good idea to test the attribute values on as many elements as possible to ensure that no small typos or inconsistencies were introduced into the texts. You can do this with XPath's `distinct-values()`
+
+In &lt;oXygen/&gt;, configure working sets to the text directory or project, and type the following into the XPath search window:
+
+`distinct-values(//elementName/@attName)`
+
+substituting "elementName" and "attName" with the relevant text. It's best to test `@place` on `<add>`, `@rend` on `<del>`, and `@hand` on `<add>`, `<del>` and `<subst>`. You should also check the various attributes on elements `<metamark>`, `<hi>`, `<unclear>`, etc.
+
+### Proofing from the test interface
+
+During the process of [creating ingest packages](publication-workflows.md), the project manager will also create full HTML files using full-html.xsl.
+
+When you are proofing from these files, you should be checking the HTML files against the manuscript images, and looking for dropped words, incorrectly colored text, misaligned text, and unrendered/incorrectly rendered text.
+
+More specifically, you are checking that:
+
+* deletions are marked as such
+* additions appear in generally the right place (keeping in mind that most additions are superscripts, unless they appear as marginal additions)
+* Metamarks such as connecting lines, inserting carrots, and arrows appear
+* Text is generally colored in a way that corresponds to the ink colors you see on the page (i.e. blue pen appears as blue text in the interface).
+
+If you see any errors in rendering or in text being incorrectly displayed, first check the XML file to see if the error appears in the encoding. If so, make a note of it. If the error is a systemic display problem (i.e. the error is a result of the stylesheet process and does not appear in the encoded document), make a note of it in a separate document for the project manager. If you see a systemic display error, you do not need to mark it every time it appears unless the error manifests differently each time.
+

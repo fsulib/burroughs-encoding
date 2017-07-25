@@ -13,6 +13,7 @@ The encoded documents that you see in the current Burroughs site are very differ
   * [Encoding Best Practices](best-practices.md)
   * [Creating the Header and Metadata](header.md)
   * [Proofing Narrative](proofing-narrative.md)
+  * [Publication Workflows](publication-workflows.md)
 * Reference
   * [Elements](elements-list.md)
   * [Attributes](attributes-list.md)
