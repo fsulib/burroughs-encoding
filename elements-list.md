@@ -64,15 +64,38 @@ The `<add>` element is used to indicate additions to the text. These may be inst
 
 ### <del>
 
+The `<del>` element is used to indicate text that was deleted. Deletions are created a number of ways in the Burroughs texts. The types of deletions are indicated with the `@rend` attribute. The possible values are:
+
+1. erased - for cases where the text was erased with some type of typewriting instant-correction tape/fluid
+2. crossedOut - for instances where the text was either crossed or scribbled out with a pen or overtyped with symbols, like "$" or "#". **Note that this is different than "overtyped" which is used with `<del>` in `<subst>` to indicate that the addition is typed over the deletion.**
+3. overtyped - this is used only in `<subst>` to indicate that the addition was typed in over the original text.
+4. overwritten - this is used only in `<subst>` to indicate that the addition was written in pen or pencil over the original text.
+
 ### <metamark>
+
+This indicates some sort of editorial marker (often ones that cannot be represented by a character typed into the encoded document). These include arrows, carrots, connecting arcs to show deletions of spaces between words, etc.
 
 ### <unclear>
 
+This element is used to encode words and letters that cannot be easily read or whose readings are uncertain because of illegibility. `<unclear>` should always have an `@reason` attribute which indicates why the text is unclear. The values on reason are:
+
+1. poorlyInked - This is used for typed letters and words that are unclear either because the ink was not properly applied to the page. This could happen because the typing mechanism was not properly depressed, or for some other reason. 
+2. illegible - This is used for instances where text (almost always handwritten) is illegible because the letters are irregularly formed (or in some cases not formed at all).
+3. obscured - This is used in cases where the text has been obscured by other writing, such as overwritten, overtyped, or crossed out text.
+4. damaged - This is used in instances where the physical documents themselves are damaged.
+5. flawedReproduction - In cases where you are working from a facsimile or digitized edition, you may end up using "flawedReproduction" (*although this is extremely rare*). This would be used in cases where you are confident that the illegibility is a result of an issue with the digitization or reproduction rather than the physical document itself. With documents transcribed from FSU's collections, you should try to check with the physical copy itself. Ideally, this value will never be used in cases where the encoder has access to the physical documents.
+
 ### <gap>
+
+This element is used when the text is completely illegible. You should use the `@extent` attribute to indicate the number of characters that you think are illegible. If multiple lines are illegible, you should use a different `<gap>` element for each line, separating the lines with an `<lb/>` element.
 
 ## Hypertextual features
 
 ### <anchor/>
 
+`<anchor/>` is an empty element used to mark where a `<note>` falls within the text. If an editorial note is commenting on a given word or section, you should put the anchor where the "\*" will appear in the published text. Each anchor should receive a `@corresp` attribute that points to the `@xml:id` of the `<note>` for that section.
+
 ### <note>
+
+The `<note>` element contains the editorial note that comments upon a given section. `<note>` should always have a unique `@xml:id`. The numbering convention for the `@xml:id` on note is usually "n" followd by 3 digits. Notes should be ordered from the start to the end of the text. So, for example, the first note would be "n001", the second "n002", the third "n003", and so on.
 
