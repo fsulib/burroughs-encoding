@@ -10,7 +10,7 @@ This document outlines the procedures for proofing and checking the Burroughs do
 
 ### Cleaning up systemic problems
 
-If you have the &lt;oXygen/&gt; XML editor, you should use it to run some checks on the texts before you generate the stylesheets. The first thing to do is to create a new project that contains every witness that will be published in that round. You should then run some standard XPath searches on that project, using the XPath search bar in the top left corner of your &lt;oXygen/&gt; editor. 
+If you have the <oXygen/> XML editor, you should use it to run some checks on the texts before you generate the stylesheets. The first thing to do is to create a new project that contains every witness that will be published in that round. You should then run some standard XPath searches on that project, using the XPath search bar in the top left corner of your <oXygen/> editor. 
 
 The following are a few tests that should be run on the documents before they are transformed using the XSLT stylesheets:
 
@@ -20,9 +20,11 @@ The following are a few tests that should be run on the documents before they ar
 
 `//del[@type]`
 
+`//del[not(@rend)]`
+
 `//subst[not(@hand)]`
 
-If either of these return any results, you should correct them. Look at the document to determine the value of `@place` for `<add>`. You should also record the information contained by `@type` on `<add>` and `<del>` to be within another allowable attribute. This will most likely be the `@place` attribute for `<add>` and the `@rend` attribute on `<del>`. Record the hand for `<subst>` based on the information in the [Known Hands](hands.md) document. For more information on the attributes used in the Burroughs documents, see the [Attributes List](attributes-list.md).
+If any of these return any results, you should correct them. Look at the document to determine the value of `@place` for `<add>`. You should also record the information contained by `@type` on `<add>` and `<del>` to be within another allowable attribute. This will most likely be the `@place` attribute for `<add>` and the `@rend` attribute on `<del>`. Record the hand for `<subst>` based on the information in the [Known Hands](hands.md) document. For more information on the attributes used in the Burroughs documents, see the [Attributes List](attributes-list.md).
 
 You should also test for instances where the `@hand` attribute is not recorded for `<del>` and `<add>`.This is a slightly tricker process, since there are several `<add>` and `<del>` elements do not have `@hand` attibutes because that information is recorded in `<subst>`. You need to look for the following XPaths:
 
@@ -34,13 +36,13 @@ If these return any results, add the correct information on `@hand`.
 
 `//del/@status`
 
-The only allowable value of `@type` on `<del>` is `implied` (although &lt;oXygen/&gt; may return some instances of `<del status="unremarkable">`, as that is the default value for that attribute; just make sure that these attributes are not actually typed in). 
+The only allowable value of `@type` on `<del>` is `implied` (although <oXygen/> may return some instances of `<del status="unremarkable">`, as that is the default value for that attribute; just make sure that these attributes are not actually typed in). 
 
 #### Testing consistency
 
 It is also a good idea to test the attribute values on as many elements as possible to ensure that no small typos or inconsistencies were introduced into the texts. You can do this with XPath's `distinct-values()`
 
-In &lt;oXygen/&gt;, configure working sets to the text directory or project, and type the following into the XPath search window:
+In <oXygen/>, configure working sets to the text directory or project, and type the following into the XPath search window:
 
 `distinct-values(//elementName/@attName)`
 
@@ -50,7 +52,7 @@ substituting "elementName" and "attName" with the relevant text. It's best to te
 
 During the process of [creating ingest packages](publication-workflows.md), the project manager will also create full HTML files using full-html.xsl.
 
-When you are proofing from these files, you should be checking the HTML files against the manuscript images, and looking for dropped words, incorrectly colored text, misaligned text, and unrendered/incorrectly rendered text.
+When you are proofing from these files, you should be checking the HTML files against the manuscript images, and looking for dropped words, incorrectly colored text, misaligned text, and unrendered/incorrectly-rendered text.
 
 More specifically, you are checking that:
 
