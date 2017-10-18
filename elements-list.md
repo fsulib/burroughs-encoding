@@ -75,6 +75,8 @@ The `<del>` element is used to indicate text that was deleted. Deletions are cre
 
 This indicates some sort of editorial marker (often ones that cannot be represented by a character typed into the encoded document). These include arrows, carrots, connecting arcs to show deletions of spaces between words, etc.
 
+`<metamark>` will usually not take any attributes. However, if the metamark is being used to indicate an insertion, `<metamark function="insert">` should be used. `@rend` should only be used on `<metamark>` if the metamark is used to indicate that characters should be "closed up" (i.e. the space or characters in between should be removed). For this type of editorial mark, you `@rend` should take the values of `upconnect` (for close-up marks that only occur above the letters), `downconnect` (for close-up marks that only occur below the letters), and `updownconnect` (for close-up marks that occur above and below the letters).
+
 ### <unclear>
 
 This element is used to encode words and letters that cannot be easily read or whose readings are uncertain because of illegibility. `<unclear>` should always have an `@reason` attribute which indicates why the text is unclear. The values on reason are:
