@@ -154,36 +154,74 @@ If the sentence occurs more than once in the witness:
 ```
 If the sentence occurs once in the witness and is split along a page:
 ```
-<surface facs="MSS2015-07-AAA">
+<surface facs="MSS2015-07-A" n="1">
   [...]
   <s n="348.0.1" part="I">This is the first part of</s>
 </surface>
-<surface facs="MSS2015-07-AAAA">
+<surface facs="MSS2015-07-AA" n="2">
   <s n="348.0.2" part="F">a sentence that ends on the following page.</s>
 </surface>
 ```
 If the sentence occurs more than in the witness and is split along a page:
 ```
-<surface facs="MSS2015-07-AAA">
+<surface facs="MSS2015-07-AAA" n="3">
   [...]
   <s n="015.1.1" part="I">This is the first occurrence of a sentence, and the sentence</s>
 </surface>
-<surface facs="MSS2015-07-AAAA">
+<surface facs="MSS2015-07-AAAA" n="4">
   <s n="015.1.2" part="F">ends on the following page.</s>
 </surface>
 ```
 
 ### `<surface>`
 
+The `<surface>` element should have an `@n` attribute that just says what page number it is (independent of the Special Collections numbering system). So the first `<surface>` should be "1", the second "2", and so on.
+
 ## `@part`
-  
+
+The `@part` attribute is used to connect fragmented elements, by specifying which part of the feature is being encoded. The TEI provides the attributes "I", "M", and "F" for this purpose, but we will only use "I" and "F".
+
 ### `<s>`
+
+The `@part` attribute should only be found on the `<s>` element, where the sentence is divided into more than one part. The first part should receive a value of "I" (for "initial"), and the second part should receive a value of "F" (for "final"). 
+
+#### Example
+```
+<surface facs="MSS2015-07-A" n="1">
+  [...]
+  <s n="348.0.1" part="I">This is the first part of</s>
+</surface>
+<surface facs="MSS2015-07-AA" n="2">
+  <s n="348.0.2" part="F">a sentence that ends on the following page.</s>
+</surface>
+```
 
 ## `@place`
 
+The `@place` attribute specifies where on a page a given feature can be found. There is a separate closed list of values on `@place` for each element than can take it as an attribute. Make sure to read the element-specific guidelines for how to apply this attribute.
+
 ### `<add>`
 
+The value of `@place` on `<add>` is determined by where the handwritten/typewritten addition appears in relation to the line being encoded or the larger page. The possible values are:
+
+* `infralinear` - for when the addition occurs below the line being transcribed
+* `supralinear` - for when the addition occurs above the line being transcribed 
+* `inline` - for when the addition is placed in line with the normal text, but the addition *does not* overwrite other text
+* `marginleft` - when the addition is in the left margin 
+* `marginright` - when the addition is in the right margin 
+* `margintop` - when the addition is in the top margin 
+* `marginbottom` - when the addition is in the bottom margin 
+
 ### `<fw>`
+
+The `@place` attribute on `<fw>` will specify where on the page the written page number is located. The possible values are:
+
+* `top-left`
+* `top-center`
+* `top-right`
+* `bottom-left`
+* `bottom-center`
+* `bottom-right`
 
 ## `@reason`
 
@@ -193,11 +231,27 @@ If the sentence occurs more than in the witness and is split along a page:
 
 ### `<del>`
 
+* `overwritten` - for when the *handwritten* deletion covers an existing line of text 
+* `overtyped` - for when the *typed* deletion covers an existing line of text 
+
 ### `<hi>`
+
+The `<hi>` element is used to encode any highlighting, underlining or cicling. As such, the values are:
+
+* `circled`
+* `underlined`
+* `boxedblock` - (for instances of circles that look more like text being boxed in.)
 
 ### `<s>`
 
+Very rarely, you will find a sentence that has a "false start" (i.e. Burroughs began typing and then stopped, flipped the page and began typing on the other side). This means that there are sentences at the bottom that are upside-down. In this case, `<s>` should take the value of "rotate180"
+
 ### `<surface>`
+
+The `<surface>` element uses `@rend` to specify whether the surface is recto or verso (in cases where both sides have been written on). The possible values are:
+
+* recto
+* verso 
 
 ## `@status`
 
