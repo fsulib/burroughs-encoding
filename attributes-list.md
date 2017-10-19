@@ -225,9 +225,26 @@ The `@place` attribute on `<fw>` will specify where on the page the written page
 
 ## `@reason`
 
+The `@reason` attribute is used to indicate *why* a given reading may be provided. Specifically, it is used in cases of obscured or illegible text, to indicate what caused the text to become unreadable. We only use `@reason` on `<unclear>`
+
 ### `<unclear>`
 
+The `@reason` attribute is *required* on `<unclear>`. The possible values for `@reason` are:
+
+* poorlyInked - This is used for typed letters and words that are unclear either because the ink was not properly applied to the page. This could happen because the typing mechanism was not properly depressed, or for some other reason. 
+* illegible - This is used for instances where text (almost always handwritten) is illegible because the letters are irregularly formed (or in some cases not formed at all).
+* obscured - This is used in cases where the text has been obscured by other writing, such as overwritten, overtyped, or crossed out text.
+* damaged - This is used in instances where the physical documents themselves are damaged.
+* flawedReproduction - In cases where you are working from a facsimile or digitized edition, you may end up using "flawedReproduction" (*although this is extremely rare*). This would be used in cases where you are confident that the illegibility is a result of an issue with the digitization or reproduction rather than the physical document itself. With documents transcribed from FSU's collections, you should try to check with the physical copy itself. Ideally, this value will never be used in cases where the encoder has access to the physical documents.
+
+#### Example
+```
+d<unclear reason="poorlyInked">i</unclear>d
+```
+
 ## `@rend`
+
+The `@rend` attribute is used to describe renditional features (how the text or other (typo)graphical features appear on the page). Each element has its own allowable values for `@rend`, so make sure you read each subsection carefully.
 
 ### `<del>`
 
@@ -255,7 +272,35 @@ The `<surface>` element uses `@rend` to specify whether the surface is recto or 
 
 ## `@status`
 
+From the TEI guidelines, the `@status` attribute
+ 
+> indicates the effect of the intervention, for example in the case of a deletion, strikeouts which include too much or too little text, or in the case of an addition, an insertion which duplicates some of the text already present.
+
 ### `<del>`
+
+The `@status` attribute is only used on the `<del>` element. The possible values are:
+
+* `excessEnd` - for instances when a physical deletion on the page continues past where the encoder assumes it ought to, based on context
+* `excessStart` - for instances when a physical deletion on the page starts before the encoder assumes it ought to, based on context
+* `shortEnd` - for instances where the deletion on the page does not follow through to the place where the encoder assumes the deletion should end based on context.
+* `shortStart` - for instances where the deletion on the page does not start at the place the encoder assumes the deletion should begin based on context.
+
+#### Examples
+For an encoded section that looks like this:
+> I really enjoyed ~attending the th~e concert yesterday
+
+```
+I really enjoyed 
+<del rend="strikethrough" hand="#proofreader">attending the </del>
+<del status="excessEnd">th</del>e concert yesterday.
+```
+
+For an encoded section that looks like this:
+> I am an encoder for the ~Willia~m Burroughs Archive
+
+```
+I am an encoder for the <del rend="strikethrough" hand="#encoder">Willia</del><del status="implied">m </del>Burroughs Archive
+```
 
 ## `@type`
 
