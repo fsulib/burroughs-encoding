@@ -4,42 +4,42 @@ This is the reference encoding documentation for the Burroughs Project. For narr
 
 List of attributes and their allowed values
 
-1. `@corresp`
-  * `<anchor/>`
-2. `@extent`
-  * `<gap/>`
-3. `@facs`
-  * `<surface>`
-4. `@function`
-  * `<metamark>`
-5. `@hand`
-  * `<add>`
-  * `<del>`
-  * `<subst>`
-6. `@n`
-  * `<s>`
-  * `<surface>`
-7. `@part`
-  * `<s>`
-8. `@place`
-  * `<add>`
-  * `<fw>`
-9. `@reason`
-  * `<unclear>`
-10. `@rend`
-  * `<del>`
-  * `<hi>`
-  * `<s>`
-  * `<surface>`
-11. `@status`
-  * `<del>`
-12. `@type`
-  * `<fw>`
-  * `<seg>`
-  * `<zone>`
-13. `@xml:id`
-  * `<note>`
-  * `<surface>`
+1. [@corresp](#corresp)
+    1. [&lt;anchor/&gt;](#anchor)
+2. [@extent](#extent)
+    1. [&lt;gap/&gt;](#gap)
+3. [@facs](#facs)
+    1. [&lt;surface&gt;](#surface)
+4. [@function](#function)
+    1. [&lt;metamark&gt;](#metamark)
+5. [@hand](#hand)
+    1. [&lt;add&gt;](#add)
+    2. [&lt;del&gt;](#del)
+    3. [&lt;subst&gt;](#subst)
+6. [@n][#n]
+    1. [&lt;s&gt;](#s)
+    2. [&lt;surface&gt;](#surface-1)
+7. [@part](#part)
+    1. [&lt;s&gt;](#s-1)
+8. [@place](#place)
+    1. [&lt;add&gt;](#add-1)
+    2. [&lt;fw&gt;](#fw)
+9. [@reason](#reason)
+    1. [&lt;unclear&gt;](#unclear)
+10. [@rend](#rend)
+    1. [&lt;del&gt;](#del-1)
+    2. [&lt;hi&gt;](#hi)
+    3. [&lt;s&gt;](#s-2)
+    4. [&lt;surface&gt;](#surface-2)
+11. [@status](#status)
+    1. [&lt;del&gt;](#del-2)
+12. [@type](#type)
+    1. [&lt;fw&gt;](#fw-1)
+    2. [&lt;seg&gt;](#seg)
+    3. [&lt;zone&gt;](#zone)
+13. [@xml:id](#xmlid)
+    1. [&lt;note&gt;](#note)
+    2. [&lt;surface&gt;](#surface-3)
 
 ## `@corresp`
 
@@ -94,7 +94,7 @@ The `@function` attribute on `<metamark>` only takes one possible value: `insert
 
 ## `@hand`
 
-The `@hand` attribute should appear on any element describing a textual feature that involves handwriting. The only exceptions to this rule are when `<add>` or `<del>` elements occur inside `<subst>`, in which case `<add>` and `<del>` are assumed to have the same value on `@hand` as their parent.
+The `@hand` attribute should appear on any element describing a textual feature that involves handwriting. The only exceptions to this rule are when `<add>` or `<del>` elements occur inside `<subst>`, in which case `<add>` and `<del>` are assumed to have the same value on `@hand` as their parent. Additionally, `<del>` elements with a `@status` of "shortStart" or "shortEnd" do not require `@hand`.
 
 This attribute allows you to specify whose handwriting is present in the text. For a list of known hands in the Burroughs documents, see the [hands.md](hands.md) file. This will give you a list of features (including type and color of ink, features of the script, etc.), which you should use to determine which hand to use.
 
@@ -109,7 +109,7 @@ The `<add>` element should always take a `@hand` attribute, unless it is a child
 
 ### `<del>`
 
-The `<del>` element should always take a `@hand` attribute, unless it is a child of `<subst>`. The value on `@hand` is a pointer to some `@xml:id`, which you can find on the [list of hands](hands.md).
+The `<del>` element should always take a `@hand` attribute, unless it is a child of `<subst>` or has a `@status` of "shortStart" or "shortEnd". The value on `@hand` is a pointer to some `@xml:id`, which you can find on the [list of hands](hands.md).
 
 #### Example
 ```
@@ -248,8 +248,12 @@ The `@rend` attribute is used to describe renditional features (how the text or 
 
 ### `<del>`
 
+`<del>` requires a `@rend` attribute unless it has a `@status` of "shortStart" or "shortEnd".
+
+* `erased` - for instances where the text has been erased
 * `overwritten` - for when the *handwritten* deletion covers an existing line of text 
 * `overtyped` - for when the *typed* deletion covers an existing line of text 
+* `crossedOut` - for instances where the text has simply been crossed out
 
 ### `<hi>`
 
@@ -282,8 +286,8 @@ The `@status` attribute is only used on the `<del>` element. The possible values
 
 * `excessEnd` - for instances when a physical deletion on the page continues past where the encoder assumes it ought to, based on context
 * `excessStart` - for instances when a physical deletion on the page starts before the encoder assumes it ought to, based on context
-* `shortEnd` - for instances where the deletion on the page does not follow through to the place where the encoder assumes the deletion should end based on context.
-* `shortStart` - for instances where the deletion on the page does not start at the place the encoder assumes the deletion should begin based on context.
+* `shortEnd` - for instances where the deletion on the page does not follow through to the place where the encoder assumes the deletion should end based on context. Using "shortEnd" means that you should also refrain from using the `@hand` and `@rend` attributes.
+* `shortStart` - for instances where the deletion on the page does not start at the place the encoder assumes the deletion should begin based on context. Using "shortEnd" means that you should also refrain from using the `@hand` and `@rend` attributes.
 
 #### Examples
 For an encoded section that looks like this:
@@ -291,7 +295,7 @@ For an encoded section that looks like this:
 
 ```
 I really enjoyed 
-<del rend="strikethrough" hand="#proofreader">attending the </del>
+<del rend="crossedOut" hand="#proofreader">attending the </del>
 <del status="excessEnd">th</del>e concert yesterday.
 ```
 
@@ -299,19 +303,33 @@ For an encoded section that looks like this:
 > I am an encoder for the ~Willia~m Burroughs Archive
 
 ```
-I am an encoder for the <del rend="strikethrough" hand="#encoder">Willia</del><del status="implied">m </del>Burroughs Archive
+I am an encoder for the <del rend="crossedOut" hand="#encoder">Willia</del><del status="implied">m </del>Burroughs Archive
 ```
 
 ## `@type`
 
+The `@type` attribute is used to divide elements into different categories. In the Burroughs Archive, it is only used on `<fw>`, `<seg>`, and `<zone>`.
+
 ### `<fw>`
+
+The `@type` attribute on `<fw>` should always be "pageNum".
 
 ### `<seg>`
 
+The `@type` on `<seg>` will  always be "transposition".
+
 ### `<zone>`
+
+The `<zone>` element will default to having no `@type` specified. However, if you need to mark the existence of a heading, you should use `<zone type="head">`. Or if the zone of text is a false start, you should use `<zone type="falseStart">`.
 
 ## `@xml:id`
 
+The `@xml:id` is used to provide unique identifiers for the elements in the text. For our purposes, they will only be used on `<note>` and `<surface>`.
+
 ### `<note>`
 
+A unique identifier should be given to every `<note>` element, by using the `@xml:id` attribute. The naming convention for `@xml:id` is "n" followed by 3 digits, indicating which number note you are on in the document (from start to finish). The first note should be "n001", the second "n002", the third "n003", and so on. 
+
 ### `<surface>`
+
+The `@xml:id` on surface should be the page identifier provided by special collections. If you do not know these identifiers, talk to the publications manager.
