@@ -4,23 +4,23 @@ This is the reference encoding documentation for the Burroughs Project. For narr
 
 ## Table of Contents
 
-1. Division-level features
-  1. &lt;sourceDoc&gt;
-  2. &lt;surfaceGrp&gt;
-  3. &lt;surface&gt;
-2. Chunk-level elements
-  1. &lt;zone&gt;
-  2. &lt;s&gt;
-3. Phrase-level features
-  1. &lt;subst&gt;
-  2. &lt;add&gt;
-  3. &lt;del&gt;
-  4. &lt;metamark&gt;
-  5. &lt;unclear&gt;
-  6. &lt;gap&gt;
-4. Hypertextual features
-  1. &lt;anchor/&gt;
-  2. &lt;note&gt;
+1. [Division-level features](#division-level-features)
+    1. [&lt;sourceDoc&gt;](#sourceDoc)
+    2. [&lt;surfaceGrp&gt;](#surfaceGrp)
+    3. [&lt;surface&gt;](#surface)
+2. [Chunk-level elements](#chunk-level-elements)
+    1. [&lt;zone&gt;](#zone)
+    2. [&lt;s&gt;](#s)
+3. [Phrase-level features](#phrase-level-features)
+    1. [&lt;subst&gt;](#subst)
+    2. [&lt;add&gt;](#add)
+    3. [&lt;del&gt;](#del)
+    4. [&lt;metamark&gt;](#metamark)
+    5. [&lt;unclear&gt;](#unclear)
+    6. [&lt;gap&gt;](#gap)
+4. [Hypertextual features](#hypertextual-features)
+    1. [&lt;anchor/&gt;](#anchor)
+    2. [&lt;note&gt;](#note)
   
 ## Division-level features
 
