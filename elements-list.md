@@ -5,8 +5,8 @@ This is the reference encoding documentation for the Burroughs Project. For narr
 ## Table of Contents
 
 1. [Division-level features](#division-level-features)
-    1. [&lt;sourceDoc&gt;](#sourceDoc)
-    2. [&lt;surfaceGrp&gt;](#surfaceGrp)
+    1. [&lt;sourceDoc&gt;](#sourcedoc)
+    2. [&lt;surfaceGrp&gt;](#surfacegrp)
     3. [&lt;surface&gt;](#surface)
 2. [Chunk-level elements](#chunk-level-elements)
     1. [&lt;zone&gt;](#zone)
